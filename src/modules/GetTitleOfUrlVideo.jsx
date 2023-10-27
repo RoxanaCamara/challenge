@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const GetTitleOfUrlVideo = ({ API_KEY, handleLastVideoSearch }) => {
+const GetTitleOfUrlVideo = ({ API_KEY }) => {
   const [idChannel, setidChannel] = useState("");
   const [VideoTitle, setVideoTitle] = useState("");
   const [urlVideo, setUrlVideo] = useState('');
@@ -60,7 +60,6 @@ const GetTitleOfUrlVideo = ({ API_KEY, handleLastVideoSearch }) => {
     loadClient();
     execute();
     gapi.load("client");
-    handleLastVideoSearch()
   };
 
   return (
