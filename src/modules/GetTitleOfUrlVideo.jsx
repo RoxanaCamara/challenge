@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { db, readData, writeUserData } from "../api/firebase.config";
 
 const GetTitleOfUrlVideo = ({ API_KEY }) => {
   const [idChannel, setidChannel] = useState("");
   const [VideoTitle, setVideoTitle] = useState("");
-  const [urlVideo, setUrlVideo] = useState('');
+  const [urlVideo, setUrlVideo] = useState("");
 
   //OnChange
 
@@ -18,8 +19,7 @@ const GetTitleOfUrlVideo = ({ API_KEY }) => {
     const { value } = e.target;
     const text = youtube_parser(value) || "No posible parsear";
     setidChannel(text);
-    setUrlVideo(value)
-
+    setUrlVideo(value);
   };
 
   //onClick
@@ -40,6 +40,9 @@ const GetTitleOfUrlVideo = ({ API_KEY }) => {
     }
     // Make sure the client is loaded before calling this method.
     function execute() {
+      videoSearched()
+      readData(1)
+
       return gapi.client.youtube.videos
         .list({
           part: ["snippet"],
@@ -60,6 +63,11 @@ const GetTitleOfUrlVideo = ({ API_KEY }) => {
     loadClient();
     execute();
     gapi.load("client");
+  };
+
+  const videoSearched = () => {
+    console.log('nare')
+    writeUserData(1, 'nare', 'narela@gmail', 'https://www.youtube.com/watch?v=m4_9TFeMfJE')
   };
 
   return (

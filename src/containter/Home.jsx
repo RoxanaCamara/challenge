@@ -5,9 +5,6 @@ export const Home = () => {
   const { logOut, user } = UserAuth();
   const API_KEY = "AIzaSyDlM6xVaCe48amOJNXwpHq-wyI7EytcA5Y";
 
-  const handleLastVideoSearch = () => {
-    //guardar en la base de datos url, usuario y url video
-  };
 
   const cerrarSesión = async () => {
     try {
