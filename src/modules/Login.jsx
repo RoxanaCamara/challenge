@@ -1,39 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import logogoogle from "./logoogle.png";
+import { Container } from "../helpers/constantes";
+import { UserAuth } from "../helpers/Auth";
 
-const Login = ({ setAutenticado }) => {
-
-  const [user, setUser] = useState({ name: '', password: '' });
-
-  const handleUser = (name, value) => {
-    setUser( { ...user, [name]: value  }  )
-  }
-
-  const handleAutenticar = () => {
-    
-  }
+const Login = ({}) => {
+  const { googleSignIn } = UserAuth();
+  const iniciarSesion = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <input
-        type="text"
-        id="name_user"
-        placeholder="Enter name user"
-        onChange={(e) => {
-          handleUser('name', e.target.value);
-        }}
-      />
+    <>
+      <Container>
+        <section className="imgseccion">
+          <div className="fondocontent"></div>
+        </section>
+        <section className="panelsesion">
+          <h2>Iniciar sesión</h2>
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        onChange={(e) => {
-          handleUser( 'password', e.target.value);
-        }}
-      />
-      <button onClick={(e) => setAutenticado(true)}>Login</button>
-    </div>
+          <button onClick={iniciarSesion} className="btniniciar">
+            <img src={logogoogle} />
+            <span> Iniciar con Gmail</span>
+          </button>
+        </section>
+      </Container>
+    </>
   );
 };
 

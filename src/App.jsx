@@ -1,13 +1,18 @@
-import "./App.css";
 import { Home } from "./containter/Home";
-import { AuthContextProvider, UserAuth } from "./modules/Auth";
+import { AuthContextProvider, UserAuth } from "./helpers/Auth";
+import Login from "./modules/Login";
+
+const RequireAuth = ({ children }) => {
+  const { user } = UserAuth();
+  return user && Object.keys(user).length !== 0 ? children : <Login />;
+};
 
 function App() {
-  const { user } = UserAuth();
-  console.log("🚀 ~ file: App.jsx:7 ~ App ~ user:", user);
   return (
     <AuthContextProvider>
-      {Object.keys(user).length === 0 ? <h1>Login Gmail</h1> : <Home />}
+      <RequireAuth>
+        <Home />
+      </RequireAuth>
     </AuthContextProvider>
   );
 }

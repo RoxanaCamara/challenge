@@ -5,11 +5,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../../api/firebase.config";
+import { auth } from "../api/firebase.config";
+import Login from "../modules/Login";
 
-const AuthContext = createContext(
-  { googleSignIn: ()=> {}, logOut: ()=> {}, user: {} }
-);
+const AuthContext = createContext({
+  googleSignIn: () => {},
+  logOut: () => {},
+  user: {},
+});
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
@@ -23,12 +26,12 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("User", currentUser);
     });
     return () => {
       unsubscribe();
     };
   }, []);
+
   return (
     <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
       {children}
