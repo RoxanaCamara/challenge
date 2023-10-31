@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { db, readData, writeUserData } from "../api/firebase.config";
 
-const GetTitleOfUrlVideo = ({ API_KEY }) => {
-  const [idChannel, setidChannel] = useState("");
+const GetTitleOfUrlVideo = ({ API_KEY, setUrlVideo, idChannel, setidChannel, setshow }) => {
   const [VideoTitle, setVideoTitle] = useState("");
-  const [urlVideo, setUrlVideo] = useState("");
+  
 
   //OnChange
 
@@ -54,6 +53,7 @@ const GetTitleOfUrlVideo = ({ API_KEY }) => {
             console.log("Response");
             const titleVideo = response.result.items[0].snippet.title || "";
             setVideoTitle(titleVideo);
+            setshow(true)
           },
           function (err) {
             console.error("Execute error", err);
@@ -63,6 +63,7 @@ const GetTitleOfUrlVideo = ({ API_KEY }) => {
     loadClient();
     execute();
     gapi.load("client");
+
   };
 
   const videoSearched = () => {
