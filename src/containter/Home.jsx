@@ -32,9 +32,9 @@ export const Home = () => {
           idChannel={idChannel}
           setshow={setshow}
         />
-        {(show) && (
+        {show && 
           <YouTubeAudioPlayer urlVideo={urlVideo} />
-        )}
+        }
       </div>
     </>
   );
